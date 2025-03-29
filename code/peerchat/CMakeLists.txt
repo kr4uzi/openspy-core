@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 3.22)
 
 project(peerchat)
 find_package(SSL)
+find_package(libuv REQUIRED)
+find_package(ZLIB REQUIRED)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -34,8 +36,4 @@ include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable (peerchat ${ALL_SRCS})
 
-IF(WIN32)	
-	target_link_libraries(peerchat openspy.lib SharedTasks.lib z)
-ELSE() #unix
-	target_link_libraries(peerchat openspy SharedTasks z)
-ENDIF()
+target_link_libraries(peerchat openspy SharedTasks)

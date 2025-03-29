@@ -68,6 +68,7 @@ IF(WIN32)
 	source_group("Headers\\OS\\Logger\\Win32\\" FILES ${PLAT_LOGGER_HDRS})
 
 	set (ALL_PLAT ${PLAT_LOGGER_SRCS} ${PLAT_LOGGER_HDRS})
+	set (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 ELSE() #unix
 	file(GLOB PLAT_LOGGER_SRCS "OS/Logger/Unix/*.cpp")
 	source_group("Sources\\OS\\Logger\\Unix\\" FILES ${PLAT_LOGGER_SRCS})
@@ -76,11 +77,13 @@ ELSE() #unix
 	source_group("Headers\\OS\\Logger\\Unix\\" FILES ${PLAT_LOGGER_HDRS})
 
 	set (ALL_PLAT ${PLAT_LOGGER_SRCS} ${PLAT_LOGGER_HDRS})
-
-	
 ENDIF()
+
 add_library (openspy SHARED ${ALL_SRCS} ${ALL_PLAT})
 target_link_libraries(openspy ${CURL_LIBRARIES} pugixml rabbitmq::rabbitmq libuv::uv jansson::jansson hiredis::hiredis hiredis::hiredis_ssl ${SSL_LIBS})
+if (WIN32)
+	target_link_libraries(openspy ws2_32)
+endif()
 
 INSTALL(TARGETS openspy
   ARCHIVE DESTINATION lib

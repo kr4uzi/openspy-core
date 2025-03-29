@@ -10,6 +10,9 @@ file(GLOB MAIN_SRCS "src/OS/*.cpp" "src/OS/SharedTasks/Account/*.cpp" "src/OS/Sh
 SET(OPENSPY_SharedTasks_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${JANSSON_INCLUDE_DIRS})
 include_directories (${OPENSPY_SharedTasks_INCLUDE_DIRS})
 
+IF(WIN32)
+	set (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+ENDIF()
 
 add_library (SharedTasks SHARED ${MAIN_SRCS})
 

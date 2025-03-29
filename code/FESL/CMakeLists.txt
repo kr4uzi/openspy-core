@@ -5,6 +5,9 @@ find_package(SSL)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+find_package(libuv REQUIRED)
+find_package(ZLIB REQUIRED)
+
 file (GLOB MAIN_SRCS "*.cpp")
 file (GLOB MAIN_HDRS "*.h")
 file (GLOB SERVER_SRCS "server/*.cpp")
@@ -35,8 +38,4 @@ source_group("Headers\\Server\\commands\\basic" FILES ${SERVER_BASIC_COMMANDS_HD
 source_group("Headers\\Server\\commands\\nu" FILES ${SERVER_NU_COMMANDS_HDRS})
 add_executable (FESL ${ALL_SRCS})
 
-IF(WIN32)	
-	target_link_libraries(FESL openspy.lib SharedTasks.lib z)
-ELSE() #unix
-	target_link_libraries(FESL openspy SharedTasks z)
-ENDIF()
+target_link_libraries(FESL openspy SharedTasks)

@@ -1,1 +1,8 @@
 .DS_Store
+
+.vs/
+
+code/build/
+out/
+
+vcpkg_installed/

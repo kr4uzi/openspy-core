@@ -4,6 +4,9 @@ project(cdkey)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+find_package(libuv REQUIRED)
+find_package(ZLIB REQUIRED)
+
 file (GLOB MAIN_SRCS "*.cpp")
 file (GLOB MAIN_HDRS "*.h")
 file (GLOB SERVER_SRCS "server/*.cpp")
@@ -29,8 +32,4 @@ add_executable (cdkey ${ALL_SRCS})
 
 target_compile_features(cdkey PRIVATE cxx_unrestricted_unions)
 
-IF(WIN32)	
-	target_link_libraries(cdkey openspy.lib z)
-ELSE() #unix
-	target_link_libraries(cdkey openspy z)
-ENDIF()
+target_link_libraries(cdkey openspy)

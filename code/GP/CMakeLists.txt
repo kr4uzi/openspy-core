@@ -4,6 +4,9 @@ project(GP)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+find_package(libuv REQUIRED)
+find_package(ZLIB REQUIRED)
+
 file (GLOB MAIN_SRCS "*.cpp")
 file (GLOB MAIN_HDRS "*.h")
 file (GLOB SERVER_SRCS "server/*.cpp")
@@ -31,8 +34,4 @@ source_group("Headers\\Server\\Commands" FILES ${SERVER_CMDS_HDRS})
 
 add_executable (GP ${ALL_SRCS})
 
-IF(WIN32)	
-	target_link_libraries(GP openspy.lib SharedTasks z)
-ELSE() #unix
-	target_link_libraries(GP openspy SharedTasks z)
-ENDIF()
+target_link_libraries(GP openspy SharedTasks)

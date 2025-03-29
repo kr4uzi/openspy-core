@@ -5,12 +5,19 @@
 
 #ifdef _WIN32
 	#define WIN32_LEAN_AND_MEAN
+
+	#ifdef openspy_EXPORTS
+		#define OPENSPY_LIB_API __declspec(dllexport)
+	#else
+		#define OPENSPY_LIB_API __declspec(dllimport)
+	#endif
 #else 
 	#define stricmp strcasecmp
 	#define sprintf_s snprintf
 	#define strnicmp strncasecmp
 	#define vsprintf_s vsnprintf
 	#define _strnicmp strnicmp
+	#define OPENSPY_LIB_API
 #endif
 
 #include <stdlib.h>
@@ -31,14 +38,14 @@
 
 class Config;
 namespace OS {
-	extern CURL *g_curl; //only used for curl_easy_escape
-	extern CURLSH *g_curlShare;
+	extern OPENSPY_LIB_API CURL *g_curl; //only used for curl_easy_escape
+	extern OPENSPY_LIB_API CURLSH *g_curlShare;
 	class Logger;
-	extern Logger *g_logger;
-	extern const char *g_appName;
-	extern const char *g_hostName;
-	extern const char *g_webServicesURL;
-	extern const char *g_webServicesAPIKey;
+	extern OPENSPY_LIB_API Logger *g_logger;
+	extern OPENSPY_LIB_API const char *g_appName;
+	extern OPENSPY_LIB_API const char *g_hostName;
+	extern OPENSPY_LIB_API const char *g_webServicesURL;
+	extern OPENSPY_LIB_API const char *g_webServicesAPIKey;
 	void LogText(ELogLevel level, const char *fmt, ...);
 	///////////////////////
 	/// XXX: put in os/geo/region.h

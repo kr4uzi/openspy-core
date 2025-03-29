@@ -1,6 +1,16 @@
 #ifndef _GPSHARED_H
 #define _GPSHARED_H
 
+#ifdef _WIN32
+	#ifdef SharedTasks_EXPORTS
+		#define SHAREDTASKS_LIB_API __declspec(dllexport)
+	#else
+		#define SHAREDTASKS_LIB_API __declspec(dllimport)
+	#endif
+#else
+	#define SHAREDTASKS_LIB_API
+#endif
+
 #include <string>
 #include <OS/OpenSpy.h>
 namespace GPShared {
@@ -474,7 +484,7 @@ namespace GPShared {
 		uint8_t quiet_flags;
 	} GPStatus;
 
-	extern const GPStatus gp_default_status;
+	extern SHAREDTASKS_LIB_API const GPStatus gp_default_status;
 
 	typedef struct {
 		GPErrorCode error;

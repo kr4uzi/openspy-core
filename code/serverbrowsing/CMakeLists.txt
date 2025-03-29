@@ -4,6 +4,9 @@ project(serverbrowsing)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+find_package(libuv REQUIRED)
+find_package(ZLIB REQUIRED)
+
 file (GLOB MAIN_SRCS "*.cpp")
 file (GLOB MAIN_HDRS "*.h")
 file (GLOB SERVER_SRCS "server/*.cpp")
@@ -30,11 +33,7 @@ source_group("Headers\\Tasks" FILES ${TASKS_HDRS})
 
 add_executable (serverbrowsing ${ALL_SRCS} ${MAIN_SRCS} ${MAIN_HDRS})
 
-IF(WIN32)	
-	target_link_libraries(serverbrowsing openspy.lib SharedTasks.lib z)
-ELSE() #unix
-	target_link_libraries(serverbrowsing openspy libuv::uv SharedTasks z)
-ENDIF()
+target_link_libraries(serverbrowsing openspy SharedTasks)
 
 if(BUILD_TESTING)
 add_subdirectory(test)

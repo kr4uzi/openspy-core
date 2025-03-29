@@ -32,6 +32,12 @@ On Debian-based OS:
 
 Note: Debian 12 (Bookworm) and below ship `hiredis` without SSL support. If you want to compile OpenSpy Core on Debian 12 and derived OS (like Ubuntu 22.04), you need to compile `hiredis` with `USE_SSL=1` yourself. As of Debian 13 (Trixie) the SSL version is already included.
 
+On Windows:
+1. Install latest Visual Studio with CMake, vcpkg and C++ support
+2. Open Visual Studio > Get started > Open a local folder > select the `openspy-core` folder
+3. When asked for the source directory, select the `code` folder (select the CMakeLists.txt file)
+4. Build > Install openspy
+
 ## Running
 If you refer to the "openspy-web-backend" project, this will have everything you need to get openspy running.
 From the perspective of this application, the requirements are redis, rabbitmq, and then the openspy-web-backend.
